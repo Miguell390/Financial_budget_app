@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 class="mb-4">Mig's Financial Budget</h1>
+    <div class="container">
+        <div class="form-container">
+                <div class="form-group">
+                    <label for="monthSelect">Select Month:</label>
+                    <select id="monthSelect" class="form-control"></select>
+                </div>
+
+            <form id="expenseForm">
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" class="form-control" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Expense Name:</label>
+                    <input type="text" id="description" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <!-- <input type="text" id="category" class="form-control" required> -->
+
+                    <select name="category" id="category" class="form-control">
+                        <option value="" disable selected>Select Category</option>
+                        <option value="Food">Food</option>
+                        <option value="Grocerries">Grocerries</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Wants">Wants</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Expense</button>
+            </form>
+
+        </div>  <!--div for form-container-->  
+
+            <div class="expense-summary">
+            <!-- Total expenses -->
+                <div class="total-expense"><strong>Total Expenses: </strong><span id="total">$0.00</span> 
+                
+                    <button onclick="generatePDF()">Generate pdf </button>
+
+                </div>
+                    <div class="form-group">
+                        <label for="filterCategory">Filter by category</label>
+                        <select name="filterCategory" id="filterCategory" class="form-control">
+                            <option value="all">All</option>
+                            <option value="Food">Food</option>
+                            <option value="Grocerries">Grocerries</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Wants">Wants</option>
+                        </select>
+                    </div>
+                <ul id="expenseList" class="list-group mt-4"></ul>
+            </div>
+
+    </div>
+
+    <!-- Edit Expense Modal -->
+    <div class="modal fade" id="editExpenseModal" tabindex="-1" role="dialog" aria-labelledby="editExpenseModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editExpenseModalLabel">Edit Expense</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editExpenseForm">
+                        <div class="form-group">
+                            <label for="editDate">Date:</label>
+                            <input type="date" id="editDate" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editAmount">Amount:</label>
+                            <input type="number" id="editAmount" class="form-control" min="0" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">Description:</label>
+                            <input type="text" id="editDescription" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCategory">Category:</label>
+                            <input type="text" id="editCategory" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
